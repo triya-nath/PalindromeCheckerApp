@@ -1,20 +1,18 @@
+// UC2: Palindrome Checker - Hardcoded Example
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
+        // Hardcoded string to check
+        String word = "madam";
 
-        String input = "madam";
-        boolean isPalindrome = true;
+        // Reverse the string
+        String reversedWord = new StringBuilder(word).reverse().toString();
 
-        for(int i = 0; i < input.length() / 2; i++) {
-            if(input.charAt(i) != input.charAt(input.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if(isPalindrome) {
-            System.out.println("The string is a palindrome");
+        // Check if the original string equals its reverse
+        if (word.equals(reversedWord)) {
+            System.out.println("\"" + word + "\" is a palindrome.");
         } else {
-            System.out.println("The string is not a palindrome");
+            System.out.println("\"" + word + "\" is not a palindrome.");
         }
     }
 }
