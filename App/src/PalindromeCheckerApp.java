@@ -16,13 +16,13 @@ class StackStrategy implements PalindromeStrategy {
             stack.push(c);
         }
 
-        String reversed = "";
+        StringBuilder reversed = new StringBuilder();
 
         while (!stack.isEmpty()) {
-            reversed += stack.pop();
+            reversed.append(stack.pop());
         }
 
-        return input.equals(reversed);
+        return input.equals(reversed.toString());
     }
 }
 
@@ -49,7 +49,7 @@ class DequeStrategy implements PalindromeStrategy {
 }
 
 // Main Class
-public class PalidromeCheckerApp {
+public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
@@ -68,8 +68,11 @@ public class PalidromeCheckerApp {
 
         if (choice == 1) {
             strategy = new StackStrategy();
-        } else {
+        } else if (choice == 2) {
             strategy = new DequeStrategy();
+        } else {
+            System.out.println("Invalid choice! Using Stack Strategy by default.");
+            strategy = new StackStrategy();
         }
 
         boolean result = strategy.checkPalindrome(input);
