@@ -1,24 +1,41 @@
+import java.util.Scanner;
+
 public class PalindromeCheckerApp {
 
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String word, int start, int end) {
-        // Base condition: crossed pointers
-        if (start >= end) return true;
+    // Method to check palindrome ignoring spaces and case
+    public static boolean isPalindrome(String input) {
 
-        // Check current characters
-        if (word.charAt(start) != word.charAt(end)) return false;
+        // Normalize string: remove spaces and convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Recursive call
-        return isPalindrome(word, start + 1, end - 1);
+        int left = 0;
+        int right = normalized.length() - 1;
+
+        // Two-pointer technique
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
-        String word = "racecar";
 
-        if (isPalindrome(word, 0, word.length() - 1)) {
-            System.out.println("The string \"" + word + "\" is a palindrome.");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        if (isPalindrome(input)) {
+            System.out.println("Palindrome (ignoring spaces and case).");
         } else {
-            System.out.println("The string \"" + word + "\" is not a palindrome.");
+            System.out.println("Not a Palindrome.");
         }
+
+        scanner.close();
     }
 }
