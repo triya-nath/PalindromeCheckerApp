@@ -1,3 +1,19 @@
+
+import java.util.Scanner;
+import java.util.Stack;
+
+// PalindromeChecker class (Encapsulation)
+class PalindromeChecker {
+
+    // Method to check palindrome
+    public boolean checkPalindrome(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+
 import java.util.*;
 
 public class PalindromePerformance {
@@ -41,10 +57,30 @@ public class PalindromePerformance {
             if (deque.removeFirst() != deque.removeLast()) {
                 return false;
             }
+
         }
 
-        return true;
+        String reversed = "";
+
+        // Pop characters to create reversed string
+        while (!stack.isEmpty()) {
+            reversed = reversed + stack.pop();
+        }
+
+        // Compare original and reversed string
+        return input.equals(reversed);
     }
+
+}
+
+
+// Main class
+public class PalidromeCheckerApp {
+
+// Main Class
+public class PalindromeCheckerApp {
+
+
 
     public static void main(String[] args) {
 
@@ -53,11 +89,29 @@ public class PalindromePerformance {
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
+
         // Reverse Method
         long start1 = System.nanoTime();
         boolean result1 = reverseMethod(input);
         long end1 = System.nanoTime();
         long time1 = end1 - start1;
+
+
+        PalindromeChecker checker = new PalindromeChecker();
+
+        boolean result = checker.checkPalindrome(input);
+
+        if (result) {
+            System.out.println("The string is a Palindrome");
+        } else {
+            System.out.println("The string is NOT a Palindrome");
+        }
+
+
+        System.out.println("Choose Strategy:");
+        System.out.println("1. Stack Strategy");
+        System.out.println("2. Deque Strategy");
+
 
         // Stack Method
         long start2 = System.nanoTime();
@@ -75,6 +129,7 @@ public class PalindromePerformance {
         System.out.println("Reverse Method: " + result1 + " | Time: " + time1 + " ns");
         System.out.println("Stack Method: " + result2 + " | Time: " + time2 + " ns");
         System.out.println("Deque Method: " + result3 + " | Time: " + time3 + " ns");
+
 
         sc.close();
     }
